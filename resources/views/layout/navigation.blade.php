@@ -71,8 +71,8 @@ _________________________________________________________ -->
                         <div class="navbar-header">
 
                             <a class="navbar-brand home" href="{{ route('home') }}">
-                                <img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                                <img src="{{ asset('img/logo.png') }}" alt="Universal logo" class="hidden-xs hidden-sm">
+                                <img src="{{ asset('img/logo-small.png') }}" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -108,7 +108,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="{{ asset('img/template-easy-customize.png') }}" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Shortcodes</h5>
@@ -154,7 +154,7 @@ _________________________________________________________ -->
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-homepage.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="{{ asset('img/template-homepage.png') }}" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Portfolio</h5>

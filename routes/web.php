@@ -21,3 +21,12 @@ Route::post('/register', 'Auth\RegistrationController@postRegister');
 Route::name('auth.login')->get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@postLogin');
 Route::name('auth.logout')->post('/logout', 'Auth\LoginController@logout');
+
+Route::prefix('admin')->group(function() {
+	Route::resource('/manage/user', 'Admin\UsersController');
+	Route::resource('/manage/roles', 'Admin\RolesController');
+
+	Route::name('assign.role')->post('/role/assign/{user}/{role}', 'Admin\ManageRolesController@assignRole');
+	Route::name('remove.role')->post('/role/remove/{user}/{role}', 'Admin\ManageRolesController@removeRole');
+
+});
