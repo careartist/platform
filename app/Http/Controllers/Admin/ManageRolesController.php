@@ -24,6 +24,8 @@ class ManageRolesController extends Controller
     	$user = Sentinel::findById($user);
     	$role = Sentinel::findRoleById($role);
     	$role->users()->attach($user);
+
+        return back();
     }
 
     public function removeRole($user, $role)
@@ -31,7 +33,7 @@ class ManageRolesController extends Controller
     	$user = Sentinel::findById($user);
     	$role = Sentinel::findRoleById($role);
     	$role->users()->detach($user);
-
+        
     	return back();
     }
 }

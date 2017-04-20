@@ -23,8 +23,9 @@ Route::post('/login', 'Auth\LoginController@postLogin');
 Route::name('auth.logout')->post('/logout', 'Auth\LoginController@logout');
 
 Route::prefix('admin')->group(function() {
-	Route::resource('/manage/user', 'Admin\UsersController');
 	Route::resource('/manage/roles', 'Admin\RolesController');
+	Route::resource('/manage/users', 'Admin\UsersController');
+	Route::name('user.roles')->get('/manage/users/{user}/roles', 'Admin\RolesController@userRoles');
 
 	Route::name('assign.role')->post('/role/assign/{user}/{role}', 'Admin\ManageRolesController@assignRole');
 	Route::name('remove.role')->post('/role/remove/{user}/{role}', 'Admin\ManageRolesController@removeRole');

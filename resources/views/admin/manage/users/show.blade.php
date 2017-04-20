@@ -17,7 +17,7 @@
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="{{ route('user.index') }}">Manage Users</a> - 
+                                <a href="{{ route('users.index') }}">Manage Users</a> - 
                                 {{ $user->profile->screen_name }}
                             </li>
                         </ul>
@@ -37,7 +37,7 @@
                                 <div class="col-md-12">
                                     {{ $user->profile->screen_name }} 
                                     <span class="pull-right">
-                                        <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">
+                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">
                                         Edit User
                                         </a>
                                     </span>
@@ -48,8 +48,28 @@
                                 <div class="col-md-12">
                                     {{ $user->profile->first_name }} {{ $user->profile->last_name }}
                                 </div>
+                                @if($user->profile->subdomain)
                                 <div class="col-md-12">
-                                    <a href="{{ route('roles.show', ['role' => $user->id]) }}" class="btn btn-xs btn-primary">
+                                    <a href="http://{{ $user->profile->subdomain }}.{{ config('app.domain_name') }}" target="_blank">
+                                        http://{{ $user->profile->subdomain }}.{{ config('app.domain_name') }}
+                                    </a>
+                                </div>
+
+                                @endif
+                                <div class="col-md-12">
+                                    <hr><h4>Roles</h4><hr>
+                                    <ul>
+                                    @if(count($user->roles) > 0)
+                                        @foreach($user->roles as $role)
+                                        <li>{{ $role->name }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>No roles</li>
+                                    @endif
+                                    </ul>
+                                </div>
+                                <div class="col-md-12">
+                                    <a href="{{ route('user.roles', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">
                                     Manage Roles
                                     </a>
                                 </div>

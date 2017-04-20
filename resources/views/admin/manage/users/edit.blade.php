@@ -17,8 +17,8 @@
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="{{ route('user.index') }}">Manage Users</a> - 
-                                <a href="{{ route('user.show', ['user' => $user->id]) }}">
+                                <a href="{{ route('users.index') }}">Manage Users</a> - 
+                                <a href="{{ route('users.show', ['user' => $user->id]) }}">
                                     {{ $user->profile->screen_name }}
                                 </a>
                             </li>
@@ -34,7 +34,7 @@
 @section('content')
                     <div class="col-md-6 col-md-offset-3">
                         <div class="box">
-                            <form action="{{ route('user.update', ['user' => $user->id]) }}" method="post">
+                            <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="form-group{{ $errors->has('screen_name') ? ' has-error' : '' }}">

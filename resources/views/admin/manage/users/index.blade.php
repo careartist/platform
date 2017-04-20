@@ -35,7 +35,7 @@
                                 <div class="col-md-12">
                                     {{ $user->profile->screen_name }} 
                                     <span class="pull-right">
-                                        <a href="{{ route('user.show', ['user' => $user->id]) }}">Show User</a>
+                                        <a href="{{ route('users.show', ['user' => $user->id]) }}">Show User</a>
                                     </span>
                                 </div>
                                 @endif

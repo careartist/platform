@@ -17,8 +17,7 @@
                                 <a href="{{ route('home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="{{ route('user.index') }}">Manage Users</a> - 
-                                {{ $user->profile->screen_name }}
+                                <a href="{{ route('roles.index') }}">Manage Roles</a>
                             </li>
                         </ul>
 
@@ -35,35 +34,20 @@
                         <div class="box">
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{ $user->profile->screen_name }} 
-                                    <span class="pull-right">
-                                        <a href="{{ route('user.edit', ['role' => $user->id]) }}" class="btn btn-xs btn-primary">
-                                        Edit User
-                                        </a>
-                                    </span>
-                                </div>
-                                <div class="col-md-12">
-                                    {{ $user->email }}
-                                </div>
-                                <div class="col-md-12">
-                                    {{ $user->profile->first_name }} {{ $user->profile->last_name }}
-                                </div>
-                                <div class="col-md-12">
-                                    <ul>
-                                    @foreach($user->roles as $role)
-                                        <li>{{ $role->name }} 
-                                        <span class="pull-right">
-                                            <a href="{{ route('remove.role', ['user' => $user->id, 'role' => $role->id]) }}"
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('remove-{{ $role->slug }}-role').submit();">
-                                                Remove role {{ $role->name }} 
-                                            </a>
-                                            <form id="remove-{{ $role->slug }}-role" action="{{ route('remove.role', ['user' => $user->id, 'role' => $role->id]) }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </span></li>
+                                <h4>Role: {{ ucfirst(trans($role)) }}</h4>
+                                <hr>
+                                    <div class="row">
+                                    @foreach($users as $user)
+                                        <div class="col-md-12">
+                                            <span>
+                                                <a href="{{ route('users.show', ['user' => $user->id]) }}"> {{ $user->profile->screen_name }}</a>
+                                            </span>
+                                            <span class="pull-right">
+                                                <a href="{{ route('user.roles', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">All roles</a>
+                                            </span>
+                                        </div>
                                     @endforeach
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
