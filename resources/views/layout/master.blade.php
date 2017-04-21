@@ -297,7 +297,6 @@ _________________________________________________________ -->
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
-    @yield('script')
     
     <!-- <script src="js/jquery.cookie.js"></script> -->
     <!-- <script src="js/waypoints.min.js"></script> -->
@@ -305,6 +304,8 @@ _________________________________________________________ -->
     <!-- <script src="js/jquery.parallax-1.1.3.js"></script> -->
     <script src="{{ asset('js/front.js') }}"></script>
 
+    @yield('script')
+    
 </body>
 
 </html>

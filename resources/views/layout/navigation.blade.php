@@ -24,20 +24,24 @@ _________________________________________________________ -->
                                     <li class="dropdown">
                                         <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">{{ Sentinel::getUser()->profile->screen_name }} <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                        @if(Sentinel::getUser()->roles()->first() && Sentinel::getUser()->roles()->first()->slug == 'admin')
+                                            @if(Sentinel::getUser()->roles()->first() && Sentinel::getUser()->roles()->first()->slug == 'admin')
                                             <li>
                                                 <a href="{{ route('users.index') }}">Manage Users</a>
                                             </li>
                                             <li>
                                                 <a href="{{ route('roles.index') }}">Manage Roles</a>
                                             </li>
-                                        @endif
+                                            <li>
+                                                <a href="{{ route('admin.profile') }}">Profile</a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <a href="{{ route('user.profile') }}">Profile</a>
+                                            </li>
                                             <li>
                                                 <a href="#">Account</a>
                                             </li>
-                                            <li>
-                                                <a href="#">Profile</a>
-                                            </li>
+                                            @endif
                                             <li>
                                                 <a href="#">Settings</a>
                                             </li>

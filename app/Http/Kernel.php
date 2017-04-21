@@ -61,5 +61,7 @@ class Kernel extends HttpKernel
         'seller' => \App\Http\Middleware\SellerMiddleware::class,
         'buyer' => \App\Http\Middleware\BuyerMiddleware::class,
         'bidder' => \App\Http\Middleware\BidderMiddleware::class,
+        'admin_address' => \App\Http\Middleware\CheckAdminAddress::class,
+        'user_address' => \App\Http\Middleware\CheckUserAddress::class,
     ];
 }

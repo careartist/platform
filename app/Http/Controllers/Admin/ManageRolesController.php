@@ -17,6 +17,7 @@ class ManageRolesController extends Controller
     public function __construct()
     {
         $this->middleware('admin');
+        $this->middleware('admin_address');
     }
 
     public function assignRole($user, $role)

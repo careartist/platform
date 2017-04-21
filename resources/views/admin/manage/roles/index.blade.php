@@ -42,7 +42,6 @@
                                 <div class="col-md-12">
                                     <ul>
                                     @foreach($admins as $admin)
-                                    @if(Sentinel::getUser()->id !== $admin->id)
                                         <li>
                                             <a href="{{ route('users.show', ['user' => $admin->id]) }}">
                                                 {{ $admin->profile->screen_name }}
@@ -53,7 +52,6 @@
                                                 </a>
                                             </span>
                                         </li>
-                                    @endif
                                     @endforeach
                                     </ul>
                                 </div>
@@ -72,7 +70,6 @@
                                 <div class="col-md-12">
                                     <ul>
                                     @foreach($artists as $artist)
-                                    @if(Sentinel::getUser()->id !== $artist->id)
                                         <li>
                                             <a href="{{ route('users.show', ['user' => $artist->id]) }}">
                                                 {{ $artist->profile->screen_name }}
@@ -83,7 +80,6 @@
                                                 </a>
                                             </span>
                                         </li>
-                                    @endif
                                     @endforeach
                                     </ul>
                                 </div>
@@ -102,7 +98,6 @@
                                 <div class="col-md-12">
                                     <ul>
                                     @foreach($sellers as $seller)
-                                    @if(Sentinel::getUser()->id !== $seller->id)
                                         <li>
                                             <a href="{{ route('users.show', ['user' => $seller->id]) }}">
                                                 {{ $seller->profile->screen_name }}
@@ -113,7 +108,6 @@
                                                 </a>
                                             </span>
                                         </li>
-                                    @endif
                                     @endforeach
                                     </ul>
                                 </div>
@@ -128,7 +122,6 @@
                                 <div class="col-md-12">
                                     <ul>
                                     @foreach($buyers as $buyer)
-                                    @if(Sentinel::getUser()->id !== $buyer->id)
                                         <li>
                                             <a href="{{ route('users.show', ['user' => $buyer->id]) }}">
                                                 {{ $buyer->profile->screen_name }}
@@ -139,7 +132,6 @@
                                                 </a>
                                             </span>
                                         </li>
-                                    @endif
                                     @endforeach
                                     </ul>
                                 </div>
@@ -154,7 +146,6 @@
                                 <div class="col-md-12">
                                     <ul>
                                     @foreach($bidders as $bidder)
-                                    @if(Sentinel::getUser()->id !== $bidder->id)
                                         <li>
                                             <a href="{{ route('users.show', ['user' => $bidder->id]) }}">
                                                 {{ $bidder->profile->screen_name }}
@@ -165,7 +156,6 @@
                                                 </a>
                                             </span>
                                         </li>
-                                    @endif
                                     @endforeach
                                     </ul>
                                 </div>

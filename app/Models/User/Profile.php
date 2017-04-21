@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User\Address;
 
 class Profile extends Model
 {
@@ -21,4 +22,9 @@ class Profile extends Model
         'account_type',
         'user_id',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'id', 'address_id');
+    }
 }
