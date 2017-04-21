@@ -31,14 +31,19 @@
                         <div class="box">
                             <div class="row">
                                 @foreach($users as $user)
-                                @if(Sentinel::getUser()->id !== $user->id)
                                 <div class="col-md-12">
                                     {{ $user->profile->screen_name }} 
                                     <span class="pull-right">
                                         <a href="{{ route('users.show', ['user' => $user->id]) }}">Show User</a>
                                     </span>
+                                    <ul>
+                                        <li>{{ $user->profile->first_name }} {{ $user->profile->last_name }}</li>
+                                        @if($user->profile->address)
+                                        <li>{{ $user->profile->address->region->place }}, {{ $user->profile->address->place->place }}</li>
+                                        @endif
+                                        <li>{{ $user->email }}</li>
+                                    </ul>
                                 </div>
-                                @endif
                                 @endforeach
                             </div>
                         </div>

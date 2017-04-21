@@ -30,50 +30,68 @@
 @endsection
 
 @section('content')
-
                     <div class="col-md-6 col-md-offset-3">
                         <div class="box">
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{ $user->profile->screen_name }} 
+                                    <hr>
+                                        Profile {{ $user->profile->screen_name}}
+
                                     <span class="pull-right">
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">
                                         Edit User
                                         </a>
                                     </span>
-                                </div>
-                                <div class="col-md-12">
-                                    {{ $user->email }}
-                                </div>
-                                <div class="col-md-12">
-                                    {{ $user->profile->first_name }} {{ $user->profile->last_name }}
-                                </div>
-                                @if($user->profile->subdomain)
-                                <div class="col-md-12">
-                                    <a href="http://{{ $user->profile->subdomain }}.{{ config('app.domain_name') }}" target="_blank">
-                                        http://{{ $user->profile->subdomain }}.{{ config('app.domain_name') }}
-                                    </a>
-                                </div>
-
-                                @endif
-                                <div class="col-md-12">
-                                    <hr><h4>Roles</h4><hr>
-                                    <ul>
-                                    @if(count($user->roles) > 0)
-                                        @foreach($user->roles as $role)
-                                        <li>{{ $role->name }}</li>
-                                        @endforeach
-                                    @else
-                                        <li>No roles</li>
-                                    @endif
-                                    </ul>
-                                </div>
-                                <div class="col-md-12">
-                                    <a href="{{ route('user.roles', ['user' => $user->id]) }}" class="btn btn-xs btn-primary">
-                                    Manage Roles
-                                    </a>
+                                    <hr>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img id="img-avatar" src="@if($user->profile->avatar) {{route('home')}}/{{ $user->profile->avatar }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150 @endif" class="thumbnail img-responsive">
+                                    <p>
+                                        <form id="user-avatar" action="{{route('user.avatar', ['profile' => $user->profile->id])}}">
+                                            <input type="hidden" name="avatar" id="avatar" role="uploadcare-uploader" data-image-shrink="800x800 60%" data-crop="1:1" data-file-types="jpg JPG" />
+                                            {{ csrf_field() }}
+                                            <div id="upload-image-btn" class="hide">
+                                                <input type="submit" class="btn btn-primary" value="Save!" />
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{ $user->profile->screen_name }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            {{ $user->profile->first_name }} {{ $user->profile->last_name }} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                        Address
+                                    <span class="pull-right">
+                                        <a href="{{ route('admin.address.edit') }}">Edit Address</a>
+                                    </span>
+                                    <hr>
+                                </div>
+                            </div>
+                            @if($user->profile->address)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ $user->profile->address->region->place }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ $user->profile->address->place->place }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ $user->profile->address->address }}
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
 @endsection

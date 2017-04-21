@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\User\Ucare;
 use Sentinel;
@@ -43,7 +44,8 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        //
+        $user = Sentinel::getUser();
+        return view('admin.profile.edit')->withUser($user);
     }
 
     /**
@@ -55,6 +57,36 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $profile = Sentinel::getUser()->profile;
+
+        $validation = $this->validator($request->all(), $profile->id)->validate();
+
+        if($validation)
+        {
+            return $validation;
+        }
+
+        $profile->screen_name = $request['screen_name'];
+        $profile->first_name = $request['first_name'];
+        $profile->last_name = $request['last_name'];
+        $profile->save();
+
+        return redirect()->route('admin.profile');
+    }
+
+    /**
+     * Get a validator for an incoming address request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data, $id)
+    {
+        return Validator::make($data, [
+            'screen_name' => 'required|max:50|unique:profiles,screen_name,' . $id,
+            'first_name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'phone_number' => 'nullable|numeric|digits:10|unique:profiles,phone_number,' . $id,
+        ]);
     }
 }
