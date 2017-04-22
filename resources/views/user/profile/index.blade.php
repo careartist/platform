@@ -60,6 +60,15 @@
                                 {{ $user->profile->first_name }} {{ $user->profile->last_name }} 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if($user->role_request)
+                                    <a href="{{ route('user.request.role.show', ['request' => $user->artist_profile->id]) }}">Your request</a>
+                                @else
+                                <a href="{{ route('user.request.role.create') }}">Request Role</a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -89,6 +98,36 @@
             		</div>
             		@endif
             	</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                            Roles
+                        <span class="pull-right">
+                            <a href="#">Apply for Role</a>
+                        </span>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    @if($user->roles)
+                        @foreach($user->roles as $role)
+                        <div class="col-md-12">
+                            <a href="{{ route('describe.role', ['role' => $role->slug]) }}">{{ $role->name }}</a>
+                            @if($role->slug === 'artist')
+                            <span class="pull-right">
+                                <a href="{{ route('describe.role', ['role' => $role->slug]) }}" class="btn btn-xs btn-primary">
+                                    Subdomain Profile
+                                </a>
+                            </span>
+                            @endif
+                        </div>
+                        @endforeach
+                    @else
+                    <div class="col-md-12">
+                        no role
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
 @endsection

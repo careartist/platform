@@ -32,6 +32,9 @@ _________________________________________________________ -->
                                                 <a href="{{ route('roles.index') }}">Manage Roles</a>
                                             </li>
                                             <li>
+                                                <a href="{{ route('requests.index') }}">Role Requests</a>
+                                            </li>
+                                            <li>
                                                 <a href="{{ route('admin.profile') }}">Profile</a>
                                             </li>
                                             @else
