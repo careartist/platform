@@ -77,6 +77,10 @@ Route::prefix('user')->group(function() {
 			Route::name('user.address.update')->post('/edit', 'User\AddressController@update');
 		});
 	});
+	
+	Route::prefix('profile')->group(function() {
+		Route::resource('/artist', 'Artist\ProfileController');
+	});
 
 	Route::name('user.request.role.create')->get('/request/role', 'User\RoleRequestController@create');
 	Route::name('user.request.role.store')->post('/request/role', 'User\RoleRequestController@store');

@@ -36,7 +36,8 @@ class RegistrationController extends Controller
     	$prodile = Profile::create([
     		'screen_name' => $request['screen_name'],
     		'first_name' => $request['first_name'],
-    		'last_name' => $request['last_name'],
+            'last_name' => $request['last_name'],
+    		'account_type' => $request['account_type'],
     		'user_id' => $user->id,
     	]);
 

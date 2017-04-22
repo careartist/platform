@@ -35,6 +35,21 @@
 
                             <form action="{{ route('auth.register') }}" method="post">
                             	{{ csrf_field() }}
+                                <div class="form-group{{ $errors->has('account_type') ? ' has-error' : '' }}">
+                                    <label for="account_type">Account Type</label>
+                                    <select id="account_type" name="account_type" class="form-control">
+                                        <option value="">Select</option>
+                                        <option value="utilizator">Utilizator</option>
+                                        <option value="uap">Artist - Membru UAP</option>
+                                        <option value="artist">Artist</option>
+                                    </select>
+
+                                    @if ($errors->has('account_type'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('account_type') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="form-group{{ $errors->has('screen_name') ? ' has-error' : '' }}">
                                     <label for="screen_name">Screen Name</label>
                                     <input type="text" class="form-control" name="screen_name" id="screen_name" placeholder="Public Screen Name" value="{{ old('screen_name') }}" required>

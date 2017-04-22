@@ -9,13 +9,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                        <h1>{{ Sentinel::getUser()->profile->screen_name }}</h1>
+                        <h1>{{ $user->profile->screen_name }}</h1>
                     </div>
                     <div class="col-md-5">
                         <ul class="breadcrumb">
-                            <li><a href="{{ route('home') }}">Home</a>
-                            </li>
-                            <li>Profile</li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{ route('user.profile') }}">{{ $user->profile->screen_name }}</a></li>
+                            <li>Artist Profile</li>
                         </ul>
 
                     </div>
@@ -28,16 +28,6 @@
 @section('content')
         <div class="col-md-6 col-md-offset-3">
             <div class="box">
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                            Profile
-                        <span class="pull-right">
-                            <a href="{{ route('user.profile.edit') }}">Edit Profile</a>
-                        </span>
-                        <hr>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <img id="img-avatar" src="@if($user->profile->avatar) {{route('home')}}/{{ $user->profile->avatar }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150 @endif" class="thumbnail img-responsive">
@@ -59,74 +49,52 @@
                             <div class="col-md-12">
                                 {{ $user->profile->first_name }} {{ $user->profile->last_name }} 
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                @if($user->role_request)
-                                    <a href="{{ route('user.request.role.show', ['request' => $user->artist_profile->id]) }}">Your request</a>
-                                @else
-                                <a href="{{ route('user.request.role.create') }}">Request Role</a>
-                                @endif
-                            </div>
-                        </div>
+		                    <div class="col-md-12">
+		                        <hr>
+		                        Address
+		                        <hr>
+		                    </div>
+		                    <div class="col-md-12">
+		                        {{ $user->profile->address->region->place }}
+		                    </div>
+		                    <div class="col-md-12">
+		                        {{ $user->profile->address->place->place }}
+		                    </div>
+		            	</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <hr>
-                            Address
-                        <span class="pull-right">
-                            <a href="{{ route('user.address.edit') }}">Edit Address</a>
-                        </span>
+                            Artist Profile
                         <hr>
                     </div>
                 </div>
                 <div class="row">
-                    @if($user->profile->address)
                     <div class="col-md-12">
-                        {{ $user->profile->address->region->place }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ $user->profile->address->place->place }}
+                        {{ $user->profile->artist_profile->uap_number }}
                     </div>
             		<div class="col-md-12">
-            			{{ $user->profile->address->address }}
+            			{{ $user->profile->artist_profile->legal_name }}
             		</div>
-            		@else
             		<div class="col-md-12">
-            			<a href="{{ route('user.address.create') }}">Add address</a>
+            			{{ $user->profile->artist_profile->authority }}
             		</div>
-            		@endif
+                    <div class="col-md-12">
+                        {{ $user->profile->artist_profile->phone_number }}
+                    </div>
             	</div>
                 <div class="row">
                     <div class="col-md-12">
                         <hr>
-                            Roles
-                        <span class="pull-right">
-                            <a href="#">Apply for Role</a>
-                        </span>
+                            Bio
                         <hr>
                     </div>
                 </div>
                 <div class="row">
-                    @if($user->roles)
-                        @foreach($user->roles as $role)
-                        <div class="col-md-12">
-                            <a href="{{ route('describe.role', ['role' => $role->slug]) }}">{{ $role->name }}</a>
-                            @if($role->slug === 'artist')
-                            <span class="pull-right">
-                                <a href="{{ route('artist.index') }}" class="btn btn-xs btn-primary">
-                                    Artist Profile
-                                </a>
-                            </span>
-                            @endif
-                        </div>
-                        @endforeach
-                    @else
                     <div class="col-md-12">
-                        no role
+                    	{{ $user->profile->artist_profile->artist_bio->bio }}
                     </div>
-                    @endif
                 </div>
             </div>
         </div>

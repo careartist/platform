@@ -18,10 +18,10 @@ class CreateUserProfileTable extends Migration
             $table->string('screen_name');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('account_type');
             $table->string('subdomain')->nullable();
             $table->string('avatar')->nullable();
             $table->integer('address_id')->unsigned()->nullable();
-            $table->integer('account_type')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
