@@ -19,6 +19,8 @@ class CreateAddressesTable extends Migration
             $table->unsignedInteger('place_id');
             $table->unsignedInteger('region_id');
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
         });
     }
 
