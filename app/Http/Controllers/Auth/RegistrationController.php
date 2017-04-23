@@ -37,6 +37,7 @@ class RegistrationController extends Controller
     		'screen_name' => $request['screen_name'],
     		'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
+            'phone_number' => $request['phone_number'],
     		'account_type' => $request['account_type'],
     		'user_id' => $user->id,
     	]);
@@ -57,6 +58,7 @@ class RegistrationController extends Controller
             'screen_name' => 'required|max:50|unique:profiles',
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);

@@ -75,7 +75,7 @@
                                                 {{ $artist->profile->screen_name }}
                                             </a>
                                             <span class="pull-right">
-                                                <a href="{{ route('roles.show', ['user' => $artist->id]) }}">
+                                                <a href="{{ route('user.roles', ['user' => $artist->id]) }}">
                                                     Manage Roles
                                                 </a>
                                             </span>
@@ -103,7 +103,7 @@
                                                 {{ $seller->profile->screen_name }}
                                             </a>
                                             <span class="pull-right">
-                                                <a href="{{ route('roles.show', ['user' => $seller->id]) }}">
+                                                <a href="{{ route('user.roles', ['user' => $seller->id]) }}">
                                                     Manage Roles
                                                 </a>
                                             </span>
@@ -127,7 +127,7 @@
                                                 {{ $buyer->profile->screen_name }}
                                             </a>
                                             <span class="pull-right">
-                                                <a href="{{ route('roles.show', ['user' => $buyer->id]) }}">
+                                                <a href="{{ route('user.roles', ['user' => $buyer->id]) }}">
                                                     Manage Roles
                                                 </a>
                                             </span>
@@ -151,7 +151,7 @@
                                                 {{ $bidder->profile->screen_name }}
                                             </a>
                                             <span class="pull-right">
-                                                <a href="{{ route('roles.show', ['user' => $bidder->id]) }}">
+                                                <a href="{{ route('user.roles', ['user' => $bidder->id]) }}">
                                                     Manage Roles
                                                 </a>
                                             </span>

@@ -18,8 +18,8 @@ class CreateUserProfileTable extends Migration
             $table->string('screen_name');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('phone_number');
             $table->string('account_type');
-            $table->string('subdomain')->nullable();
             $table->string('avatar')->nullable();
             $table->integer('address_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
@@ -27,7 +27,7 @@ class CreateUserProfileTable extends Migration
 
             $table->engine = 'InnoDB';
             $table->index('user_id');
-            $table->unique(['screen_name', 'subdomain']);
+            $table->unique(['screen_name', 'phone_number']);
         });
     }
 

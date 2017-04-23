@@ -82,7 +82,7 @@ Route::prefix('user')->group(function() {
 		Route::resource('/artist', 'Artist\ProfileController');
 	});
 
-	Route::name('user.request.role.create')->get('/request/role', 'User\RoleRequestController@create');
+	Route::name('user.request.role.create')->get('/request/role/{type}', 'User\RoleRequestController@create');
 	Route::name('user.request.role.store')->post('/request/role', 'User\RoleRequestController@store');
 
 	Route::get('/ajax-places/{region}', 'User\AddressController@ajaxCities');

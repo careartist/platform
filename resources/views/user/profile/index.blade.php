@@ -26,20 +26,19 @@
 @endsection
 
 @section('content')
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <div class="box">
                 <div class="row">
                     <div class="col-md-12">
-                        <hr>
-                            Profile
+                        Profile
                         <span class="pull-right">
-                            <a href="{{ route('user.profile.edit') }}">Edit Profile</a>
+                            <a href="{{ route('user.profile.edit') }}" class="btn btn-xs btn-primary">Edit Profile</a>
                         </span>
                         <hr>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <img id="img-avatar" src="@if($user->profile->avatar) {{route('home')}}/{{ $user->profile->avatar }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150 @endif" class="thumbnail img-responsive">
                         <p>
                             <form id="user-avatar" action="{{route('user.avatar', ['profile' => $user->profile->id])}}">
@@ -51,7 +50,7 @@
                             </form>
                         </p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
                                 {{ $user->profile->screen_name }}
@@ -59,74 +58,124 @@
                             <div class="col-md-12">
                                 {{ $user->profile->first_name }} {{ $user->profile->last_name }} 
                             </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->phone_number }}
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                @if($user->role_request)
-                                    <a href="{{ route('user.request.role.show', ['request' => $user->artist_profile->id]) }}">Your request</a>
-                                @else
-                                <a href="{{ route('user.request.role.create') }}">Request Role</a>
-                                @endif
+                                <hr>
+                                    Address
+                                <span class="pull-right">
+                                    <a href="{{ route('user.address.edit') }}" class="btn btn-xs btn-primary">Edit Address</a>
+                                </span>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ $user->profile->address->region->place }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->address->place->place }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->address->address }}
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                            Address
-                        <span class="pull-right">
-                            <a href="{{ route('user.address.edit') }}">Edit Address</a>
-                        </span>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    @if($user->profile->address)
-                    <div class="col-md-12">
-                        {{ $user->profile->address->region->place }}
-                    </div>
-                    <div class="col-md-12">
-                        {{ $user->profile->address->place->place }}
-                    </div>
-            		<div class="col-md-12">
-            			{{ $user->profile->address->address }}
-            		</div>
-            		@else
-            		<div class="col-md-12">
-            			<a href="{{ route('user.address.create') }}">Add address</a>
-            		</div>
-            		@endif
-            	</div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                            Roles
-                        <span class="pull-right">
-                            <a href="#">Apply for Role</a>
-                        </span>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    @if($user->roles)
-                        @foreach($user->roles as $role)
-                        <div class="col-md-12">
-                            <a href="{{ route('describe.role', ['role' => $role->slug]) }}">{{ $role->name }}</a>
-                            @if($role->slug === 'artist')
-                            <span class="pull-right">
-                                <a href="{{ route('artist.index') }}" class="btn btn-xs btn-primary">
-                                    Artist Profile
-                                </a>
-                            </span>
+                    <div class="col-md-4">
+                    @if($user->profile->artist_profile)
+                        @if($user->profile->artist_profile->approved == 0 && $user->profile->artist_profile->rejected == 0)
+                        <div class="row">
+                            <div class="col-md-12">
+                            request pending
+                            </div>
+                        </div>
+                        @elseif($user->profile->artist_profile->rejected == 1)
+                        <div class="row">
+                            <div class="col-md-12">
+                            request rejected
+                            </div>
+                        </div>
+                        @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->cui_number }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->legal_name }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->authority }}
+                            </div>
+                            @if($user->profile->artist_profile->artist_bio)
+                                <div class="col-md-12">
+                                    <a href="http://{{ $user->profile->artist_profile->artist_bio->subdomain }}.{{ config('app.domain_name') }}" target="_blank">{{ $user->profile->artist_profile->artist_bio->subdomain }}.{{ config('app.domain_name') }}</a>
+                                </div>
+                            @else
+                                <div class="col-md-12">
+                                    <a href="{{ route('artist.index') }}" class="btn btn-xs btn-primary">
+                                        Add Artist Bio
+                                    </a>
+                                </div>
                             @endif
                         </div>
-                        @endforeach
+                        @endif
                     @else
-                    <div class="col-md-12">
-                        no role
-                    </div>
+                        @if($user->profile->account_type == 'uap' || $user->profile->account_type == 'artist')
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="pull-right">
+                                    <a href="{{ route('user.request.role.create', ['type' => $user->profile->account_type]) }}" class="btn btn-xs btn-primary">Request Artist Role</a>
+                                </span>
+                            </div>
+                        </div>
+                        @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                request buyer/bidder role
+                            </div>
+                        </div>
+                        @endif
                     @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                                Roles
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if(count($user->roles) > 0)
+                            @foreach($user->roles as $role)
+                            <div class="col-md-12">
+                                <a href="{{ route('describe.role', ['role' => $role->slug]) }}">{{ $role->name }}</a>
+                                @if($role->slug === 'artist')
+                                <span class="pull-right">
+                                    <a href="{{ route('artist.index') }}" class="btn btn-xs btn-primary">
+                                        Artist Profile
+                                    </a>
+                                </span>
+                                @endif
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="col-md-12">
+                            @if($user->profile->account_type == 'uap' || $user->profile->account_type == 'artist')
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="pull-right">
+                                        <a href="{{ route('user.request.role.create', ['type' => $user->profile->account_type]) }}" class="btn btn-xs btn-primary">Request Artist Role</a>
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

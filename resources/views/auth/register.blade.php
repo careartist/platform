@@ -80,6 +80,16 @@
                                         </span>
                                     @endif
                                 </div>
+                                <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                                    <label for="phone_number">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Your Email address" value="{{ old('phone_number') }}" required>
+                                    
+                                    @if ($errors->has('phone_number'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('phone_number') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <hr>
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label for="email">Email</label>

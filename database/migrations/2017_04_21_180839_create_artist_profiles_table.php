@@ -15,16 +15,19 @@ class CreateArtistProfilesTable extends Migration
     {
         Schema::create('artist_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('uap_number');
+            $table->string('cui_number');
             $table->string('legal_name');
             $table->string('authority');
-            $table->string('phone_number');
             $table->unsignedInteger('user_id');
             $table->boolean('approved')->default(0);
             $table->boolean('rejected')->default(0);
             $table->unsignedInteger('operated_by')->nullable();
             $table->timestamp('operated_at')->nullable();
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+            $table->index('user_id');
+            $table->unique('cui_number');
         });
     }
 

@@ -36,7 +36,7 @@
                 <form action="{{ route('user.request.role.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('cui_number') ? ' has-error' : '' }}">
-                        <label for="cui_number">CUI Number</label>
+                        <label for="cui_number">UAP Number</label>
                         <input type="text" class="form-control" name="cui_number" id="cui_number" placeholder="Public Screen Name" value="{{ old('cui_number') }}">
 
                         @if ($errors->has('cui_number'))

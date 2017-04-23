@@ -17,8 +17,13 @@ class CreateArtistProfilesBioTable extends Migration
             $table->increments('id');
             $table->text('bio');
             $table->text('tags');
+            $table->string('subdomain')->nullable();
             $table->unsignedInteger('profile_id');
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+            $table->index('profile_id');
+            $table->unique(['profile_id', 'subdomain']);
         });
     }
 

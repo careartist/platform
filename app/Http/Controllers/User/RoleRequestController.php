@@ -26,9 +26,12 @@ class RoleRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        return view('user.request.artist');
+        if($type == 'uap')
+            return view('user.request.uap');
+        elseif($type == 'artist')
+            return view('user.request.artist');
     }
 
     /**
@@ -40,7 +43,6 @@ class RoleRequestController extends Controller
     public function store(Request $request)
     {
         $user = Sentinel::getUser();
-
         if(ArtistProfile::where('user_id')->first())
         {
             return redirect()->route('user.profile');
@@ -54,17 +56,16 @@ class RoleRequestController extends Controller
         }
 
         $artist_profile = ArtistProfile::create([
-            'uap_number' => $request['uap_number'],
+            'cui_number' => $request['cui_number'],
             'legal_name' => $request['legal_name'],
             'authority' => $request['authority'],
-            'phone_number' => $request['phone_number'],
             'user_id' => $user->id,
         ]);
 
         RoleRequest::create([
             'artist_profile_id' => $artist_profile->id,
             'user_id' => $user->id,
-            'role' => 'artist',
+            'role' => $user->profile->account_type,
         ]);
 
         return redirect()->route('user.profile');
@@ -124,8 +125,7 @@ class RoleRequestController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'phone_number' => 'required|numeric|digits:10',
-            'uap_number' => 'required|max:50|unique:artist_profiles',
+            'cui_number' => 'required|max:50|unique:artist_profiles',
             'legal_name' => 'required|max:190',
             'authority' => 'required|max:190',
         ]);

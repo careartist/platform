@@ -25,10 +25,21 @@ class ManageRequestController extends Controller
     {
     	$request_role = RoleRequest::find($id);
     	$artist_profile = ArtistProfile::find($request_role->artist_profile_id);
-    	
 		$user = Sentinel::findById($request_role->user_id);
-    	$role = Sentinel::findRoleBySlug($request_role->role);
-    	$role->users()->attach($user);
+
+        if($request_role->role == 'uap')
+        {
+            $role_artist = Sentinel::findRoleBySlug('artist');
+            $role_artist->users()->attach($user);
+
+            $role_seller = Sentinel::findRoleBySlug('seller');
+            $role_seller->users()->attach($user);
+        }
+        elseif($request_role->role == 'artist')
+        {
+        	$role = Sentinel::findRoleBySlug('artist');
+        	$role->users()->attach($user);
+        }
 
     	$request_role->delete();
     	

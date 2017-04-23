@@ -19,6 +19,10 @@ class CreateRoleRequestsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('role');
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+            $table->index('user_id');
+            $table->unique('artist_profile_id');
         });
     }
 

@@ -17,7 +17,7 @@ class Profile extends Model
         'screen_name',
         'first_name',
         'last_name',
-        'subdomain',
+        'phone_number',
         'avatar',
         'address_id',
         'account_type',

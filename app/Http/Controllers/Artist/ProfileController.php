@@ -12,6 +12,15 @@ use Sentinel;
 class ProfileController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('artist');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,8 +72,8 @@ class ProfileController extends Controller
         $artist_profile->artist_bio()->create([
             'bio' => $request['bio'],
             'tags' => $request['tags'],
+            'subdomain' => $request['subdomain'],
         ]);
-
         return redirect()->route('artist.index');
     }
 
@@ -113,6 +122,7 @@ class ProfileController extends Controller
         return Validator::make($data, [
             'bio' => 'required',
             'tags' => 'required',
+            'subdomain' => 'required',
         ]);
     }
 

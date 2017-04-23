@@ -26,10 +26,14 @@
 @endsection
 
 @section('content')
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <div class="box">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
+                        Artist Profile
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
                         <img id="img-avatar" src="@if($user->profile->avatar) {{route('home')}}/{{ $user->profile->avatar }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150 @endif" class="thumbnail img-responsive">
                         <p>
                             <form id="user-avatar" action="{{route('user.avatar', ['profile' => $user->profile->id])}}">
@@ -41,7 +45,7 @@
                             </form>
                         </p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
                                 {{ $user->profile->screen_name }}
@@ -49,41 +53,37 @@
                             <div class="col-md-12">
                                 {{ $user->profile->first_name }} {{ $user->profile->last_name }} 
                             </div>
-		                    <div class="col-md-12">
-		                        <hr>
-		                        Address
-		                        <hr>
-		                    </div>
-		                    <div class="col-md-12">
-		                        {{ $user->profile->address->region->place }}
-		                    </div>
-		                    <div class="col-md-12">
-		                        {{ $user->profile->address->place->place }}
-		                    </div>
-		            	</div>
+                            <div class="col-md-12">
+                                {{ $user->profile->phone_number }}
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->address->region->place }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->address->place->place }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->uap_number }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->legal_name }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ $user->profile->artist_profile->authority }}
+                            </div>
+                            <div class="col-md-12">
+                                <a href="http://{{ $user->profile->artist_profile->artist_bio->subdomain }}.{{ config('app.domain_name') }}" target="_blank">{{ $user->profile->artist_profile->artist_bio->subdomain }}.{{ config('app.domain_name') }}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr>
-                            Artist Profile
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        {{ $user->profile->artist_profile->uap_number }}
-                    </div>
-            		<div class="col-md-12">
-            			{{ $user->profile->artist_profile->legal_name }}
-            		</div>
-            		<div class="col-md-12">
-            			{{ $user->profile->artist_profile->authority }}
-            		</div>
-                    <div class="col-md-12">
-                        {{ $user->profile->artist_profile->phone_number }}
-                    </div>
-            	</div>
                 <div class="row">
                     <div class="col-md-12">
                         <hr>

@@ -22,10 +22,9 @@ class ArtistProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'uap_number',
+        'cui_number',
         'legal_name',
         'authority',
-        'phone_number',
         'approved',
         'rejected',
         'operated_by',

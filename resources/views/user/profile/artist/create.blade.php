@@ -36,11 +36,11 @@
                 <form action="{{ route('artist.store') }}" method="post">
                 	{{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
-                        <label for="bio" class="col-md-4 control-label">Bio</label>
+                    <div class="col-md-12">
+                        <label for="bio" class="col-md-3 control-label">Bio</label>
 
-                        <div class="col-md-6">
-                            <textarea id="bio" class="form-control" name="bio"  autofocus>{{ old('bio') }}</textarea>
+                        <div class="col-md-9 form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
+                            <textarea id="bio" rows="5" class="form-control" name="bio" required autofocus>{{ old('bio') }}</textarea>
 
                             @if ($errors->has('bio'))
                                 <span class="help-block">
@@ -49,16 +49,29 @@
                             @endif
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <label for="tags" class="col-md-3 control-label">Tags</label>
 
-                    <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
-                        <label for="tags" class="col-md-4 control-label">Tags</label>
-
-                        <div class="col-md-6">
-                            <textarea id="tags" class="form-control" name="tags"  autofocus>{{ old('tags') }}</textarea>
+                        <div class="col-md-9 form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
+                            <input type="text" class="form-control" name="tags" id="tags" placeholder="Tags" value="{{ old('tags') }}" required>
 
                             @if ($errors->has('tags'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('tags') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="subdomain" class="col-md-3 control-label">Subdomain Name</label>
+
+                        <div class="col-md-9 form-group{{ $errors->has('subdomain') ? ' has-error' : '' }}">
+                            <input type="text" class="form-control" name="subdomain" id="subdomain" placeholder="Your Subdomein Name" value="{{ old('subdomain') }}" required>
+
+                            @if ($errors->has('subdomain'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('subdomain') }}</strong>
                                 </span>
                             @endif
                         </div>

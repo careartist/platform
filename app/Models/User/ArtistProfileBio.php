@@ -22,5 +22,6 @@ class ArtistProfileBio extends Model
     protected $fillable = [
         'bio',
         'tags',
+        'subdomain',
     ];
 }
