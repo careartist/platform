@@ -82,6 +82,8 @@ Route::prefix('user')->group(function() {
 		Route::resource('/artist', 'Artist\ProfileController');
 	});
 
+	Route::resource('/events', 'Artist\EventController');
+
 	Route::name('user.request.role.create')->get('/request/role/{type}', 'User\RoleRequestController@create');
 	Route::name('user.request.role.store')->post('/request/role', 'User\RoleRequestController@store');
 

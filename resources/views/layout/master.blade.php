@@ -22,6 +22,8 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Css animations  -->
+    @yield('head')
+    
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 
     <!-- Theme stylesheet, if possible do not edit this stylesheet -->
@@ -39,7 +41,6 @@
     <!-- Favicon and apple touch icons-->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon" />
 
-    @yield('head')
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([

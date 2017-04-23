@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Artist;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use App\Models\User\ArtistProfile;
-use App\Models\User\Ucare;
+use App\Models\Artist\Event;
 use Sentinel;
 
-class ProfileController extends Controller
+class EventController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,19 +26,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $ucare = Ucare::getLowestUploads();
-        $user = Sentinel::getUser();
-        $user->ucare_id = $ucare->id;
-        $user->save();
-        
-        $artist_profile = ArtistProfile::where('user_id', Sentinel::getUser()->id)->first();
-
-        if($artist_profile->artist_bio)
-        {
-            return view('user.profile.artist.index')->with(['user' => $user, 'ucare' => $ucare]);
-        }
-
-        return redirect()->route('artist.create');
+        //
     }
 
     /**
@@ -50,7 +36,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('user.profile.artist.create');
+        return view('user.profile.artist.events.create');
     }
 
     /**
@@ -61,21 +47,19 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $validation = $this->validator($request->all())->validate();
+        $user = Sentinel::getUser();
 
-        if($validation)
-        {
-            return $validation;
-        }
-
-        $artist_profile = ArtistProfile::where('user_id', Sentinel::getUser()->id)->first();
-
-        $artist_profile->artist_bio()->create([
-            'bio' => $request['bio'],
-            'tags' => $request['tags'],
-            'subdomain' => $request['subdomain'],
+        $event = Event::create([
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'type' => 'expozitie',
+            'price' => 'free',
+            'start_at' => $request['start_at'],
+            'end_at' => $request['end_at'],
+            'profile_id' => $user->profile->artist_profile->id
         ]);
-        return redirect()->route('artist.index');
+
+        return redirect()->route('user.profile');
     }
 
     /**
@@ -113,18 +97,13 @@ class ProfileController extends Controller
     }
 
     /**
-     * Get a validator for an incoming address request.
+     * Remove the specified resource from storage.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function destroy($id)
     {
-        return Validator::make($data, [
-            'bio' => 'required',
-            'tags' => 'required',
-            'subdomain' => 'required',
-        ]);
+        //
     }
-
 }

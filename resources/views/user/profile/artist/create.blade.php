@@ -52,7 +52,7 @@
                     <div class="col-md-12">
                         <label for="tags" class="col-md-3 control-label">Tags</label>
 
-                        <div class="col-md-9 form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
+                        <div class="col-md-9 form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
                             <input type="text" class="form-control" name="tags" id="tags" placeholder="Tags" value="{{ old('tags') }}" required>
 
                             @if ($errors->has('tags'))
