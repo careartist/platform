@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use App\Models\User\Ucare;
 use App\Models\Artist\EventType;
 use App\Models\Artist\Event;
+use App\Models\Artist\EventTag;
 use Sentinel;
 
 class EventController extends Controller
@@ -38,7 +40,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('user.profile.artist.events.create')->withEventTypes(EventType::get());
+        $tags = EventTag::get();
+        return view('user.profile.artist.events.create')
+            ->withEventTypes(EventType::get())
+            ->withTags($tags);
     }
 
     /**
@@ -56,6 +61,22 @@ class EventController extends Controller
             return $validation;
         }
 
+        $id_tags=array();
+        foreach ($request->tags as $tag) {
+            $result = EventTag::where('name', $tag)->first();
+            if(count($result) > 0)
+            {
+                $id_tags[] = $result->id;
+            }
+            else
+            {
+                $newtag = new EventTag;
+                $newtag->name = $tag;
+                $newtag->save();
+                $id_tags[] = $newtag->id;
+            }
+        }
+
         $user = Sentinel::getUser();
 
         $event = Event::create([
@@ -71,6 +92,8 @@ class EventController extends Controller
             'profile_id'    => $user->profile->artist_profile->id
         ]);
 
+        $event->tags()->sync($id_tags);
+
         return redirect()->route('events.show', ['event' => $event->id]);
     }
 
@@ -82,6 +105,11 @@ class EventController extends Controller
      */
     public function show($id)
     {
+        $ucare = Ucare::getLowestUploads();
+        $user = Sentinel::getUser();
+        $user->ucare_id = $ucare->id;
+        $user->save();
+
         $profile_artist = Sentinel::getUser()->profile->artist_profile;
         $event = Event::where(['id' => $id, 'profile_id' => $profile_artist->id])->first();
 
@@ -90,7 +118,9 @@ class EventController extends Controller
             return redirect()->route('events.index');
         }
         
-        return view('user.profile.artist.events.show')->withEvent($event);
+        return view('user.profile.artist.events.show')
+            ->withEvent($event)
+            ->withUcare($ucare);
     }
 
     /**

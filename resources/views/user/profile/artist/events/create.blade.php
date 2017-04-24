@@ -2,6 +2,7 @@
 
 @section('head')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+<link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('breadcrumbs')
@@ -14,6 +15,7 @@
                     <div class="col-md-5">
                         <ul class="breadcrumb">
                             <li><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{ route('events.index') }}">Events</a></li>
                             <li>Add Event</li>
                         </ul>
 
@@ -166,6 +168,18 @@
                         </div>
                     </div>
 
+                    <div class="col-md-12">
+                        <label for="tags" class="col-md-3 control-label">Tags</label>
+
+                        <div class="col-md-9 form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                            <select class="js-example-tokenizer form-control" name="tags[]" id="tags" multiple="multiple">
+                            @foreach($tags as $tag)
+                                <option>{{ $tag->name }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="text-center">
                         <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Add Event</button>
                     </div>
@@ -175,8 +189,18 @@
 @endsection
 
 @section('script')
+<script type="text/javascript" src="{{ asset('js/select2.full.min.js') }}"></script>
+
+<script>
+    $(".js-example-tokenizer").select2({
+      tags: true,
+      tokenSeparators: [',', ' '],
+      placeholder: 'Select or type your tags'
+    })
+</script>
+
 <script type="text/javascript" src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
-<script type="text/javascript">
+<script>
 
     $(".form_datetime").datetimepicker({
         format: "yyyy-mm-dd hh:ii:ss",

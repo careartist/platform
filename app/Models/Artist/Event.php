@@ -4,6 +4,7 @@ namespace App\Models\Artist;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User\ArtistProfile;
+use App\Models\Artist\EventTag;
 
 class Event extends Model
 {
@@ -36,5 +37,10 @@ class Event extends Model
     public function artist()
     {
         return $this->belongsTo(ArtistProfile::class, 'profile_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(EventTag::class);
     }
 }

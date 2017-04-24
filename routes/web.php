@@ -88,8 +88,9 @@ Route::prefix('user')->group(function() {
 	Route::name('user.request.role.store')->post('/request/role', 'User\RoleRequestController@store');
 
 	Route::get('/ajax-places/{region}', 'User\AddressController@ajaxCities');
-	Route::name('user.avatar')->post('/ajax-avatar/{profile}', 'User\AvatarController@ajaxAvatar');
 	Route::name('ucare.increment')->post('/ucare-increment', 'User\UcareController@increment');
+	Route::name('user.avatar')->post('/ajax-avatar/{profile}', 'User\AvatarController@ajaxAvatar');
+	Route::name('event.cover')->post('/ajax-cover/{event}', 'Artist\EventCoverController@ajaxCover');
 });
 
 Route::prefix('services')->group(function() {

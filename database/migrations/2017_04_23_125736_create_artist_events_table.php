@@ -25,6 +25,7 @@ class CreateArtistEventsTable extends Migration
             $table->timestamp('start_at');
             $table->timestamp('end_at')->nullable();
             $table->unsignedInteger('profile_id');
+            $table->string('cover')->nullable();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
