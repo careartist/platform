@@ -58,7 +58,7 @@ class RegistrationController extends Controller
             'screen_name' => 'required|max:50|unique:profiles',
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
-            'phone_number' => 'required|numeric|digits:10',
+            'phone_number' => 'required|numeric|digits:10|unique:profiles',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);

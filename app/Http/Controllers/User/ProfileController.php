@@ -85,7 +85,7 @@ class ProfileController extends Controller
             'screen_name' => 'required|max:50|unique:profiles,screen_name,' . $id,
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
-            'phone_number' => 'nullable|numeric|digits:10|unique:profiles,phone_number,' . $id,
+            'phone_number' => 'required|numeric|digits:10|unique:profiles,phone_number,' . $id,
         ]);
     }
 }

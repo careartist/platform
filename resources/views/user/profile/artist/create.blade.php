@@ -13,9 +13,9 @@
                     </div>
                     <div class="col-md-5">
                         <ul class="breadcrumb">
-                            <li><a href="{{ route('home') }}">Home</a>
-                            </li>
-                            <li>New account</li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{ route('user.profile') }}">{{ $user->profile->screen_name }}</a></li>
+                            <li>Artist Bio</li>
                         </ul>
 
                     </div>

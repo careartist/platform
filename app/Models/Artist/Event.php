@@ -3,6 +3,7 @@
 namespace App\Models\Artist;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User\ArtistProfile;
 
 class Event extends Model
 {
@@ -24,11 +25,16 @@ class Event extends Model
         'description',
         'type',
         'price',
+        'start_at',
+        'end_at',
         'contact_name',
         'contact_email',
         'contact_phone',
-        'start_at',
-        'end_at',
         'profile_id',
     ];
+
+    public function artist()
+    {
+        return $this->belongsTo(ArtistProfile::class, 'profile_id', 'id');
+    }
 }

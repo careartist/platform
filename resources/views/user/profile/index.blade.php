@@ -13,8 +13,7 @@
                     </div>
                     <div class="col-md-5">
                         <ul class="breadcrumb">
-                            <li><a href="{{ route('home') }}">Home</a>
-                            </li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li>Profile</li>
                         </ul>
 
@@ -140,7 +139,8 @@
                         @endif
                     @endif
                     </div>
-                    @if(count($user->profile->artist_profile->artist_events) > 0)
+
+                    @if($user->profile->artist_profile && count($user->profile->artist_profile->artist_events) > 0)
                     <div class="row">
                         <div class="col-md-12">
                             <hr>
