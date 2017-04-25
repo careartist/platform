@@ -31,6 +31,7 @@ class Event extends Model
         'contact_name',
         'contact_email',
         'contact_phone',
+        'cover',
         'profile_id',
     ];
 

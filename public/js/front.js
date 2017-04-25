@@ -11,7 +11,7 @@ $(function () {
     // sliders();
     fullScreenContainer();
     // productDetailGallery(4000);
-    menuSliding();
+    // menuSliding();
     // productDetailSizes();
     utils();
     // animations();
@@ -21,33 +21,6 @@ $(function () {
 });
 
 
-/* menu sliding */
-
-function menuSliding() {
-
-
-    $('.dropdown').on('show.bs.dropdown', function (e) {
-
-	if ($(window).width() > 750) {
-	    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-
-	}
-	else {
-	    $(this).find('.dropdown-menu').first().stop(true, true).show();
-	}
-    }
-
-    );
-    $('.dropdown').on('hide.bs.dropdown', function (e) {
-	if ($(window).width() > 750) {
-	    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-	}
-	else {
-	    $(this).find('.dropdown-menu').first().stop(true, true).hide();
-	}
-    });
-
-}
 
 /* picture zoom */
 
@@ -160,25 +133,3 @@ $.fn.alignElementsSameHeight = function () {
     });
 }
 
-// $(window).load(function () {
-
-//     windowWidth = $(window).width();
-
-//     $(this).alignElementsSameHeight();
-//     pictureZoom();
-// });
-
-$(window).resize(function () {
-
-    newWindowWidth = $(window).width();
-
-    if (windowWidth !== newWindowWidth) {
-	setTimeout(function () {
-	    $(this).alignElementsSameHeight();
-	    fullScreenContainer();
-	    pictureZoom();
-	}, 205);
-	windowWidth = newWindowWidth;
-    }
-
-});

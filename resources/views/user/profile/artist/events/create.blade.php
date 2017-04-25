@@ -133,7 +133,7 @@
                         <label for="contact_name" class="col-md-3 control-label">Contact Name</label>
 
                         <div class="col-md-9 form-group{{ $errors->has('contact_name') ? ' has-error' : '' }}">
-                            <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Contact Name" value="{{ old('contact_name') }}" required>
+                            <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Contact Name" value="{{ old('contact_name') }}">
                             @if ($errors->has('contact_name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('contact_name') }}</strong>
@@ -146,7 +146,7 @@
                         <label for="contact_email" class="col-md-3 control-label">Contact Email</label>
 
                         <div class="col-md-9 form-group{{ $errors->has('contact_email') ? ' has-error' : '' }}">
-                            <input type="text" class="form-control" name="contact_email" id="contact_email" placeholder="Contact Email" value="{{ old('contact_email') }}" required>
+                            <input type="text" class="form-control" name="contact_email" id="contact_email" placeholder="Contact Email" value="{{ old('contact_email') }}">
                             @if ($errors->has('contact_email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('contact_email') }}</strong>
@@ -159,7 +159,7 @@
                         <label for="contact_phone" class="col-md-3 control-label">Contact Email</label>
 
                         <div class="col-md-9 form-group{{ $errors->has('contact_phone') ? ' has-error' : '' }}">
-                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" placeholder="Contact Phone Number" value="{{ old('contact_phone') }}" required>
+                            <input type="text" class="form-control" name="contact_phone" id="contact_phone" placeholder="Contact Phone Number" value="{{ old('contact_phone') }}">
                             @if ($errors->has('contact_phone'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('contact_phone') }}</strong>
