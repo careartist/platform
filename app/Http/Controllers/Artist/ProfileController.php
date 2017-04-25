@@ -42,7 +42,7 @@ class ProfileController extends Controller
 
         return redirect()->route('artist.create');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

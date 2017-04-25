@@ -39,7 +39,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <img id="img-cover" src="@if($event->cover) {{route('home')}}/{{ $event->cover }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150 @endif" class="thumbnail img-responsive">
+                        <img id="img-cover" src="@if($event->cover) {{route('home')}}/{{ $event->cover }} @else https://placeholdit.imgix.net/~text?txtsize=33&txt=900%C3%97300&w=900&h=300 @endif" class="thumbnail img-responsive">
                         <p>
                             <form id="event-cover" action="{{route('event.cover', ['event' => $event->id])}}">
                                 <input type="hidden" name="cover" id="cover" role="uploadcare-uploader" data-image-shrink="1200x1200 60%" data-crop="3:1" data-file-types="jpg JPG" />
